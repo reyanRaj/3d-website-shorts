@@ -1,0 +1,11 @@
+Model Information:
+* title:	Ant-Man (Textured) (Rigged)
+* source:	https://sketchfab.com/3d-models/ant-man-textured-rigged-ec157c17cd254178969d4712d6b0a812
+* author:	CAPTAAINR (https://sketchfab.com/CAPTAAINR)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Ant-Man (Textured) (Rigged)" (https://sketchfab.com/3d-models/ant-man-textured-rigged-ec157c17cd254178969d4712d6b0a812) by CAPTAAINR (https://sketchfab.com/CAPTAAINR) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

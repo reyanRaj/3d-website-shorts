@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset=UTF-8 />
+    <style>
+        body {
+            margin: 0px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Three.js -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.136.0/build/three.min.js"></script>
+
+    <!-- GLTFLoader -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.136.0/examples/js/loaders/GLTFLoader.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/three@0.130.1/examples/js/controls/OrbitControls.js"></script>
+
+    <script>
+        // Setup three js 
+        const renderer = new THREE.WebGLRenderer();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        const scene = new THREE.Scene();
+
+        const camera = new THREE.PerspectiveCamera(
+            75,
+            window.innerWidth / window.innerHeight,
+            0.1,
+            1000
+        );
+
+        const controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.minPolarAngle = controls.maxPolarAngle = 1.57079
+        controls.enableZoom = false;
+        controls.screenSpacePanning = true;
+        controls.rotateSpeed = 0.25
+
+        const loader = new THREE.GLTFLoader();
+        const fileName = "./models/scene.gltf";
+        let model;
+        // setup three js end
+
+        // helper function start
+        function animate() {
+            requestAnimationFrame(animate);
+            controls.update();
+            renderer.render(scene, camera);
+        }
+        function addLight() {
+            const light = new THREE.DirectionalLight(0xffffff, 4);
+            light.position.set(0.5, 0, 0.866);
+            camera.add(light);
+
+            const spotLight = new THREE.SpotLight(0xff0000, 2);
+            spotLight.position.set(100, 1000, 100);
+            scene.add(spotLight);
+        }
+        function adjustModelAndCamera() {
+            const box = new THREE.Box3().setFromObject(model);
+            const size = box.getSize(new THREE.Vector3()).length();
+            const center = box.getCenter(new THREE.Vector3());
+
+            camera.near = size / 100;
+            camera.far = size * 100;
+            camera.updateProjectionMatrix();
+
+            camera.position.x = 0.005176962150997459;
+            camera.position.y = 0.006176962150997459;
+            camera.position.z = 0.10669073122848426;
+
+            model.position.y = -0.55
+        }
+        // helper function ends
+
+        // loading model start
+        loader.load(
+            fileName,
+            function (gltf) {
+                model = gltf.scene;
+                scene.add(model);
+                addLight();
+                adjustModelAndCamera();
+                scene.add(camera);
+                renderer.render(scene, camera);
+                animate()
+            },
+            undefined,
+            function (e) {
+                console.error(e);
+            }
+        );
+        //  loading model end
+    </script>
+</body>
+
+</html>
